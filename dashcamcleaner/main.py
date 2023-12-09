@@ -53,7 +53,7 @@ class MainWindow(QMainWindow):
         """
         Create and connect a blurrer thread
         """
-        weights_name = self.ui.combo_box_weights.currentText()
+        weights_name = 'UK_licence_plate.pt'
         init_params = self.aggregate_parameters()
         blur_wrapper = qtVideoBlurWrapper(weights_name, init_params)
         blur_wrapper.setMaximum.connect(self.setMaximumValue)
@@ -102,8 +102,9 @@ class MainWindow(QMainWindow):
         self.ui.progress.setMaximum(value)
 
     def aggregate_parameters(self):
-        model_name = self.ui.combo_box_weights.currentText()
-        training_inference_size = int(re.search(r"(?P<imgsz>\d*)p\_", model_name).group("imgsz"))
+        #model_name = self.ui.combo_box_weights.currentText()
+        #training_inference_size = int(re.search(r"(?P<imgsz>\d*)p\_", model_name).group("imgsz"))
+        training_inference_size = 1080
         inference_size = int(training_inference_size * 16 / 9)
         return {
             "input_path": self.ui.line_source.text(),
